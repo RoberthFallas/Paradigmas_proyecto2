@@ -8,21 +8,9 @@
    <children>
       <TabPane layoutX="393.0" layoutY="193.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab fx:id="tab_empleados" text="Empleados">
-            <content>
-              <AnchorPane fx:id="tab_empleados" minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1024.0" />
-            </content>
-          </Tab>
-          <Tab fx:id="tab_puestos" text="Puestos">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1024.0" />
-            </content>
-          </Tab>
-          <Tab fx:id="tab_planillas" text="Planillas">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1024.0" />
-            </content>
-          </Tab>
+          <Tab fx:id="tab_empleados" text="Empleados" />
+          <Tab fx:id="tab_puestos" text="Puestos" />
+          <Tab fx:id="tab_planillas" text="Planillas" />
         </tabs>
       </TabPane>
    </children>
