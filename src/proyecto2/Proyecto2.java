@@ -19,10 +19,9 @@ public class Proyecto2 extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        stage.setTitle("Proyecto 2");
         Parent root = FXMLLoader.load(getClass().getResource("view/Base.fxml"));
-        
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
         stage.show();
     }
