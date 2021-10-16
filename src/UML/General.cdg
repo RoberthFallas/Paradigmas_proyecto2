@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="General">
+  <ClassDiagramComponents>
+    <Class name="Empleado" package="" visibility="public" xPosition="25.0" yPosition="509.0">
+      <Fields>
+        <Field name="cedula" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="pApellido" type="String" visibility="private"/>
+        <Field name="sApellido" type="String" visibility="private"/>
+        <Field name="fechaNacimiento" type="LocalDate" visibility="private"/>
+        <Field name="puesto" type="Puesto" visibility="private"/>
+        <Field name="telefono" type="String" visibility="private"/>
+        <Field name="email" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="Empleado" returnType="void" visibility="public"/>
+        <Method name="getCedula" returnType="String" visibility="public"/>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="getPrimerApellido" returnType="String" visibility="public"/>
+        <Method name="getSApellido" returnType="String" visibility="public"/>
+        <Method name="getFechaNacimiento" returnType="LocalDate" visibility="public"/>
+        <Method name="getTelefono" returnType="String" visibility="public"/>
+        <Method name="getEmail" returnType="String" visibility="public"/>
+        <Method name="setCedula" returnType="void" visibility="public">
+          <Argument type="String" name="cedula"/>
+        </Method>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="setSApellido" returnType="void" visibility="public">
+          <Argument type="String" name="sa"/>
+        </Method>
+        <Method name="setPApellido" returnType="void" visibility="public">
+          <Argument type="String" name="pa"/>
+        </Method>
+        <Method name="setFechaNacimiento" returnType="void" visibility="public">
+          <Argument type="LocalDate" name="date"/>
+        </Method>
+        <Method name="setPuesto" returnType="void" visibility="public">
+          <Argument type="Puesto" name="puesto"/>
+        </Method>
+        <Method name="setTelefono" returnType="void" visibility="public">
+          <Argument type="String" name="tl"/>
+        </Method>
+        <Method name="setEmail" returnType="void" visibility="public">
+          <Argument type="String" name="em"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Puesto" package="" visibility="public" xPosition="601.0" yPosition="516.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="salario" type="Float" visibility="private"/>
+        <Field name="empleados" type="List&lt;Empleado&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="getSalario" returnType="Float" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public"/>
+        <Method name="setSalario" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Planilla" package="" visibility="public" xPosition="538.0" yPosition="160.0">
+      <Fields>
+        <Field name="puestos" type="List&lt;Puesto&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="pagarPlanilla" returnType="Float" visibility="public"/>
+        <Method name="getNumEmpleados" returnType="Integer" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="empleados" source="Puesto" target="Empleado" type="Composition" sourceCardinality="0..1" targetCardinality="0..1"/>
+    <HasRelation name="puestos" source="Planilla" target="Puesto" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
