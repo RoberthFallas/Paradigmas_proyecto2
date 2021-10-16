@@ -49,11 +49,12 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Puesto" package="" visibility="public" xPosition="601.0" yPosition="516.0">
+    <Class name="Puesto" package="" visibility="public" xPosition="483.0" yPosition="374.0">
       <Fields>
         <Field name="nombre" type="String" visibility="private"/>
         <Field name="salario" type="Float" visibility="private"/>
         <Field name="empleados" type="List&lt;Empleado&gt;" visibility="private"/>
+        <Field name="descripcion" type="String" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods>
@@ -61,6 +62,8 @@
         <Method name="getSalario" returnType="Float" visibility="public"/>
         <Method name="setNombre" returnType="void" visibility="public"/>
         <Method name="setSalario" returnType="void" visibility="public"/>
+        <Method name="getDescripcion" returnType="String" visibility="public"/>
+        <Method name="setDescripcion" returnType="void" visibility="public"/>
       </Methods>
     </Class>
     <Class name="Planilla" package="" visibility="public" xPosition="538.0" yPosition="160.0">
