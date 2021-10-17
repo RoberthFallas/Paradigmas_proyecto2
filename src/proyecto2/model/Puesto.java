@@ -8,7 +8,7 @@ public class Puesto {
 
     private String nombre;
     private Float salario;
-    private List<Empleado> empleados;
+    private List<Empleado> empleados;                                           //FUERA DE USO, QUITAR FUTURAMENTE
     private String descripcion;
 
     public Puesto(String nombre, Float salario, String descripcion) {

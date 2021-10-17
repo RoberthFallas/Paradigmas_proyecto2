@@ -34,7 +34,7 @@ import proyecto2.util.Mensaje;
 /**
  * FXML Controller class
  *
- * @author rober
+ * @author Gerardo
  */
 public class EmpleadosViewController implements Initializable {
 
@@ -55,7 +55,7 @@ public class EmpleadosViewController implements Initializable {
     @FXML
     private Button btnGuardar;
 
-    private ArrayList<Empleado> empleados = new ArrayList<>();
+    private final ArrayList<Empleado> empleados = new ArrayList<>();
     @FXML
     private TableView<Empleado> tblEmpleados;
     public ObservableList<Empleado> Empleadostabla;
@@ -105,28 +105,27 @@ public class EmpleadosViewController implements Initializable {
 
     @FXML
     private void GuardarEmpleado(ActionEvent event) {
-        Empleado nuevoEmpledo = new Empleado(txtCedula.getText(), txtNombre.getText(), txtPApellido.getText(), txtSApellido.getText(), dtpFechaNacimiento.getValue(), ckPuestos.getValue(), txtTelefono.getText(), txtCorreo.getText(), Integer.parseInt(txtHorasLaboradas.getText()));
-        if (!btnCancelar.isVisible()) {
-            if (formularioCompleto()) {
+
+        if (formularioCompleto()) {
+            Empleado nuevoEmpledo = new Empleado(txtCedula.getText(), txtNombre.getText(), txtPApellido.getText(), txtSApellido.getText(), dtpFechaNacimiento.getValue(), ckPuestos.getValue(), txtTelefono.getText(), txtCorreo.getText(), Integer.parseInt(txtHorasLaboradas.getText()));
+            if (!btnCancelar.isVisible()) {
                 if (!existeEmpleado(nuevoEmpledo)) {
                     empleados.add(nuevoEmpledo);
                     AppContext.getInstance().set("listEmpleados", empleados);
-                    tblEmpleados.getItems().clear();
                     tblEmpleados.getItems().addAll(empleados);
-                    ObservableList<Puesto> listaLocal = (ObservableList<Puesto>) AppContext.getInstance().get("puestos");
-                    for (Puesto puestoActual : listaLocal) {
-                        if (puestoActual == ckPuestos.getValue()) {
-                            puestoActual.addEmpleado(nuevoEmpledo);
-                        }
-                    }
                     limpiar();
+                }else{
+                    new Mensaje().show(Alert.AlertType.WARNING, "Atención", "Este empleado ya existe");
                 }
+            } else {
+                editarEmpleado(nuevoEmpledo);
+                limpiar();
             }
+            tblEmpleados.getItems().clear();
+            tblEmpleados.getItems().addAll(empleados);
         } else {
-            editarEmpleado(nuevoEmpledo);
-            limpiar();
+            new Mensaje().show(Alert.AlertType.WARNING, "Atención", "Algunos campos requeridos están vacíos");
         }
-
     }
 
     private void cargarPropiedadesTable() {
@@ -158,60 +157,53 @@ public class EmpleadosViewController implements Initializable {
     }
 
     private void agregarBotonElimiar() {
-        Callback<TableColumn<Empleado, Void>, TableCell<Empleado, Void>> cellFactory = new Callback<TableColumn<Empleado, Void>, TableCell<Empleado, Void>>() {
-            @Override
-            public TableCell<Empleado, Void> call(final TableColumn<Empleado, Void> param) {
-                final TableCell<Empleado, Void> cell = new TableCell<Empleado, Void>() {
-                    private final Button btn = new Button("Eliminar");
+        Callback<TableColumn<Empleado, Void>, TableCell<Empleado, Void>> cellFactory = (final TableColumn<Empleado, Void> param) -> {
+            final TableCell<Empleado, Void> cell = new TableCell<Empleado, Void>() {
+                private final Button btn = new Button("Eliminar");
 
-                    {
-                        btn.setOnAction((ActionEvent event) -> {
-                            eliminarEmpleado(getTableView().getItems().get(getIndex()));
-                        });
-                    }
+                {
+                    btn.setOnAction((ActionEvent event) -> {
+                        eliminarEmpleado(getTableView().getItems().get(getIndex()));
+                    });
+                }
 
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn);
-                        }
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(btn);
                     }
-                };
-                return cell;
-            }
+                }
+            };
+            return cell;
         };
         tblEliminar.setCellFactory(cellFactory);
     }
 
     private void agregarBotonEditar() {
-        Callback<TableColumn<Empleado, Void>, TableCell<Empleado, Void>> cellFactory = new Callback<TableColumn<Empleado, Void>, TableCell<Empleado, Void>>() {
-            @Override
-            public TableCell<Empleado, Void> call(final TableColumn<Empleado, Void> param) {
-                final TableCell<Empleado, Void> cell = new TableCell<Empleado, Void>() {
-                    private final Button btn = new Button("Editar");
+        Callback<TableColumn<Empleado, Void>, TableCell<Empleado, Void>> cellFactory = (final TableColumn<Empleado, Void> param) -> {
+            final TableCell<Empleado, Void> cell = new TableCell<Empleado, Void>() {
+                private final Button btn = new Button("Editar");
 
-                    {
-                        btn.setOnAction((ActionEvent event) -> {
-                            cargarDatosClienteSeleccionado(getTableView().getItems().get(getIndex()));
+                {
+                    btn.setOnAction((ActionEvent event) -> {
+                        cargarDatosClienteSeleccionado(getTableView().getItems().get(getIndex()));
+                    });
+                }
 
-                        });
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(btn);
                     }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn);
-                        }
-                    }
-                };
-                return cell;
-            }
+                }
+            };
+            return cell;
         };
 
         tblEditar.setCellFactory(cellFactory);
@@ -235,6 +227,7 @@ public class EmpleadosViewController implements Initializable {
         txtPApellido.setText(empleado.getpApellido());
         txtSApellido.setText(empleado.getsApellido());
         txtTelefono.setText(empleado.getTelefono());
+        txtHorasLaboradas.setText(empleado.getHorasLaborales().toString());
         dtpFechaNacimiento.setValue(empleado.getFechaNacimiento());
         ckPuestos.setValue(empleado.getPuesto());
         tblEmpleados.setDisable(true);
@@ -253,13 +246,16 @@ public class EmpleadosViewController implements Initializable {
 
     @FXML
     private void buscarEmpleado(ActionEvent event) {
+        String e = txtHorasLaboradas.getText();
+        String e1 = txtCedula.getText();
+        String e2 = txtHorasLaboradas.getText();
         tblEmpleados.getItems().clear();
-        List<Empleado> emple = new ArrayList<>();
-        emple = empleados.stream().filter(x -> (x.getCedula().toUpperCase().contains(txtCedula.getText().toUpperCase()))
+        List<Empleado> emple = new ArrayList();
+        emple = empleados.stream().filter(x ->
+                (x.getCedula().toUpperCase().contains(txtCedula.getText().toUpperCase()))
                 && (x.getNombre().toUpperCase().contains(txtNombre.getText().toUpperCase()))
-                && (x.getsApellido().toUpperCase().contains(txtSApellido.getText().toUpperCase()))
-                && (x.getTelefono().toUpperCase().contains(txtTelefono.getText().toUpperCase()))
-                && (x.getHorasLaborales() == Integer.parseInt(txtHorasLaboradas.getText()))).collect(Collectors.toList());
+                && (x.getpApellido().toUpperCase().contains(txtPApellido.getText().toUpperCase()))
+                && (x.getsApellido().toUpperCase().contains(txtSApellido.getText().toUpperCase()))).collect(Collectors.toList());
         emple.forEach(cnsmr -> {
             tblEmpleados.getItems().add(cnsmr);
         });
@@ -269,8 +265,7 @@ public class EmpleadosViewController implements Initializable {
         btnBuscar.setVisible(true);
         btnCancelar.setVisible(false);
         tblEmpleados.setDisable(false);
-         empleados.set(posicionEditar, nuevoEmpleado);
-         tblEmpleados.getItems().set(posicionEditar, nuevoEmpleado);
+        empleados.set(posicionEditar, nuevoEmpleado);
         AppContext.getInstance().set("listEmpleados", empleados);
 
     }
