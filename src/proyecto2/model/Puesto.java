@@ -47,7 +47,7 @@ public class Puesto {
         return descripcion;
     }
     
-    public void setEmpleado(Empleado empleado){
+    public void addEmpleado(Empleado empleado){
         this.empleados.add(empleado);
     }
 
