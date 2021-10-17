@@ -37,8 +37,8 @@ public class BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        tab_empleados.setContent(this.getTabContent("EmpleadosView"));
         tab_puestos.setContent(this.getTabContent("PuestosView"));
+        tab_empleados.setContent(this.getTabContent("EmpleadosView"));
         tab_planillas.setContent(this.getTabContent("PlanillasView"));
     }
 
