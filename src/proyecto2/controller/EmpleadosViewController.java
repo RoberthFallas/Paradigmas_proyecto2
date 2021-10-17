@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -27,6 +28,8 @@ import javafx.scene.control.TableCell;
 import proyecto2.model.Empleado;
 import proyecto2.model.Puesto;
 import proyecto2.util.AppContext;
+import proyecto2.util.Formato;
+import proyecto2.util.Mensaje;
 
 /**
  * FXML Controller class
@@ -82,7 +85,7 @@ public class EmpleadosViewController implements Initializable {
     @FXML
     private TextField txtHorasLaboradas;
     @FXML
-    private TableColumn<?, ?> tblPuesto;
+    private TableColumn<Empleado, String> tblPuesto;
     @FXML
     private TableColumn<Empleado, String> tblHorasLaborales;
     @FXML
@@ -90,13 +93,19 @@ public class EmpleadosViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        txtCedula.setTextFormatter(Formato.getInstance().cedulaFormat(12));
+        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(12));
+        txtPApellido.setTextFormatter(Formato.getInstance().letrasFormat(12));
+        txtSApellido.setTextFormatter(Formato.getInstance().letrasFormat(14));
+        txtTelefono.setTextFormatter(Formato.getInstance().integerFormat());
+        txtHorasLaboradas.setTextFormatter(Formato.getInstance().integerFormat());
         cargarPropiedadesTable();
         cargarPuestos();
     }
 
     @FXML
     private void GuardarEmpleado(ActionEvent event) {
-        Empleado nuevoEmpledo = new Empleado(txtCedula.getText(), txtNombre.getText(), txtPApellido.getText(), txtSApellido.getText(), dtpFechaNacimiento.getValue(), txtTelefono.getText(), txtCorreo.getText(), Integer.parseInt(txtHorasLaboradas.getText()));
+        Empleado nuevoEmpledo = new Empleado(txtCedula.getText(), txtNombre.getText(), txtPApellido.getText(), txtSApellido.getText(), dtpFechaNacimiento.getValue(), ckPuestos.getValue(), txtTelefono.getText(), txtCorreo.getText(), Integer.parseInt(txtHorasLaboradas.getText()));
         if (!btnCancelar.isVisible()) {
             if (formularioCompleto()) {
                 if (!existeEmpleado(nuevoEmpledo)) {
@@ -104,6 +113,12 @@ public class EmpleadosViewController implements Initializable {
                     AppContext.getInstance().set("listEmpleados", empleados);
                     tblEmpleados.getItems().clear();
                     tblEmpleados.getItems().addAll(empleados);
+                    ObservableList<Puesto> listaLocal = (ObservableList<Puesto>) AppContext.getInstance().get("puestos");
+                    for (Puesto puestoActual : listaLocal) {
+                        if (puestoActual == ckPuestos.getValue()) {
+                            puestoActual.addEmpleado(nuevoEmpledo);
+                        }
+                    }
                     limpiar();
                 }
             }
@@ -124,6 +139,7 @@ public class EmpleadosViewController implements Initializable {
         tblCorreo.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getEmail()));
         tblFechaNacimiento.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getFechaNacimiento().toString()));
         tblHorasLaborales.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getHorasLaborales())));
+        tblPuesto.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getPuesto().getNombre()));
         agregarBotonEditar();
         agregarBotonElimiar();
     }
@@ -136,6 +152,8 @@ public class EmpleadosViewController implements Initializable {
         txtSApellido.setText("");
         txtTelefono.setText("");
         txtHorasLaboradas.setText("");
+        ckPuestos.setValue(null);
+        dtpFechaNacimiento.setValue(null);
 
     }
 
@@ -218,6 +236,7 @@ public class EmpleadosViewController implements Initializable {
         txtSApellido.setText(empleado.getsApellido());
         txtTelefono.setText(empleado.getTelefono());
         dtpFechaNacimiento.setValue(empleado.getFechaNacimiento());
+        ckPuestos.setValue(empleado.getPuesto());
         tblEmpleados.setDisable(true);
         btnCancelar.setVisible(true);
         btnBuscar.setVisible(false);
@@ -250,10 +269,10 @@ public class EmpleadosViewController implements Initializable {
         btnBuscar.setVisible(true);
         btnCancelar.setVisible(false);
         tblEmpleados.setDisable(false);
-        System.out.println("proyecto2.controller.EmpleadosViewController.editarEmpleado()  " + posicionEditar);
-        empleados.set(posicionEditar, nuevoEmpleado);
-        tblEmpleados.getItems().set(posicionEditar, nuevoEmpleado);
+         empleados.set(posicionEditar, nuevoEmpleado);
+         tblEmpleados.getItems().set(posicionEditar, nuevoEmpleado);
         AppContext.getInstance().set("listEmpleados", empleados);
+
     }
 
     private boolean existeEmpleado(Empleado nuevoEmpledo) {
@@ -272,7 +291,7 @@ public class EmpleadosViewController implements Initializable {
                 && txtTelefono.getText().length() != 0
                 && txtCorreo.getText().length() != 0
                 && txtHorasLaboradas.getText().length() != 0
-                && dtpFechaNacimiento.getValue() != null) {
+                && dtpFechaNacimiento.getValue() != null && ckPuestos.getValue() != null) {
             return true;
         }
         return false;
