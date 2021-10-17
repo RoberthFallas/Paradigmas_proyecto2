@@ -25,6 +25,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import proyecto2.model.Puesto;
+import proyecto2.util.Formato;
 import proyecto2.util.Mensaje;
 
 /**
@@ -64,6 +65,7 @@ public class PuestosViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         prepararTabla();
         rellenarTabla();
+        txtSalario.setTextFormatter(Formato.getInstance().twoDecimalFormat());
     }
 
     private void prepararTabla() {
