@@ -34,7 +34,7 @@ import proyecto2.util.Mensaje;
 /**
  * FXML Controller class
  *
- * @author rober
+ * @author Roberth
  */
 public class PuestosViewController implements Initializable {
 

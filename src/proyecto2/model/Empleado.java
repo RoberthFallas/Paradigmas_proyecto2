@@ -20,7 +20,7 @@ public class Empleado {
     private String telefono;
 
     private String email;
-    private int horasLaborales;
+    private Integer horasLaborales;
 
     public Empleado(String cedula, String nombre, String pApellido, String sApellido, LocalDate fechaNacimiento, Puesto puesto, String telefono, String email, int horasLaborales) {
         this.cedula = cedula;
@@ -104,11 +104,11 @@ public class Empleado {
         this.email = email;
     }
 
-    public int getHorasLaborales() {
+    public Integer getHorasLaborales() {
         return horasLaborales;
     }
 
-    public void setHorasLaborales(int horasLaborales) {
+    public void setHorasLaborales(Integer horasLaborales) {
         this.horasLaborales = horasLaborales;
     }
 
