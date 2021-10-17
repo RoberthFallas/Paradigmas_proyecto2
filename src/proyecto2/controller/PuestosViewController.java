@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,6 +27,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import proyecto2.model.Puesto;
+import proyecto2.util.AppContext;
 import proyecto2.util.Formato;
 import proyecto2.util.Mensaje;
 
@@ -53,7 +56,7 @@ public class PuestosViewController implements Initializable {
     private TableColumn<Puesto, String> clDescripcion;
     @FXML
     private TableColumn<Puesto, Void> clacciones;
-    private final List<Puesto> temporalList = new ArrayList();
+    private final ObservableList<Puesto> listaLocal2 = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -66,6 +69,7 @@ public class PuestosViewController implements Initializable {
         prepararTabla();
         rellenarTabla();
         txtSalario.setTextFormatter(Formato.getInstance().twoDecimalFormat());
+        AppContext.getInstance().set("puestos", listaLocal2);
     }
 
     private void prepararTabla() {
@@ -114,7 +118,7 @@ public class PuestosViewController implements Initializable {
         @SuppressWarnings("All")
         List<Puesto> resultados = new ArrayList();
 
-        resultados = temporalList.stream().filter(
+        resultados = listaLocal2.stream().filter(
                 itm -> (itm.getNombre().toUpperCase().contains(txtNombre.getText().toUpperCase()))
                 && (itm.getSalario().toString().contains(txtSalario.getText()))
                 && (itm.getDescripcion().toUpperCase().contains(txtDescripcion.getText().toUpperCase())))
@@ -126,13 +130,13 @@ public class PuestosViewController implements Initializable {
 
     private void rellenarTabla() {
 
-        Puesto p1 = new Puesto("Pediatria", 2000000f, "Trabajan con niños");
-        Puesto p2 = new Puesto("Cardiología", 3000000f, "Trabajan con corazones");
-        Puesto p3 = new Puesto("Oncología", 4000000f, "Trabajan con cancer");
-        Puesto p4 = new Puesto("Otorrinonaringología", 5000000f, "Trabajan con caras");
-        Puesto p5 = new Puesto("Psicología", 6000000f, "Trabajan con mentes");
+        Puesto p1 = new Puesto("Pediatria", 8000f, "Trabajan con niños");
+        Puesto p2 = new Puesto("Cardiología", 10000f, "Trabajan con corazones");
+        Puesto p3 = new Puesto("Oncología", 15000f, "Trabajan con cancer");
+        Puesto p4 = new Puesto("Otorrinonaringología", 8000f, "Trabajan con caras");
+        Puesto p5 = new Puesto("Psicología", 6000f, "Trabajan con mentes");
 
-        temporalList.addAll(Arrays.asList(p1, p2, p3, p4, p5));
+        listaLocal2.addAll(Arrays.asList(p1, p2, p3, p4, p5));
 
     }
 
@@ -149,7 +153,7 @@ public class PuestosViewController implements Initializable {
                         Float.valueOf(txtSalario.getText()), txtDescripcion.getText().trim());
 
                 new Mensaje().show(Alert.AlertType.INFORMATION, "Acción completada", "Has registrado un puesto");
-                temporalList.add(nuevo);
+                listaLocal2.add(nuevo);
                 limpiarCampos(null);
             }
         } else {

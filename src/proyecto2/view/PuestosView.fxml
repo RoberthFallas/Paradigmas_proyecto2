@@ -65,7 +65,7 @@
                   <TableView fx:id="tbPuestos" prefHeight="371.0" prefWidth="2000.0">
                      <columns>
                         <TableColumn fx:id="clNombre" prefWidth="194.33334350585938" text="Nombre" />
-                        <TableColumn fx:id="clSalario" prefWidth="236.66665649414062" text="Salario" />
+                        <TableColumn fx:id="clSalario" prefWidth="236.66665649414062" text="Salario por hora" />
                         <TableColumn fx:id="clDescripcion" prefWidth="418.6666259765625" text="Descripción" />
                         <TableColumn fx:id="clacciones" prefWidth="172.0" text="Acciones" />
                      </columns>

@@ -6,22 +6,17 @@
 package proyecto2.controller;
 
 import java.net.URL;
-import static java.sql.JDBCType.NULL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -29,8 +24,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import javafx.scene.control.TableCell;
-import javafx.scene.input.KeyEvent;
 import proyecto2.model.Empleado;
+import proyecto2.model.Puesto;
 import proyecto2.util.AppContext;
 
 /**
@@ -50,8 +45,6 @@ public class EmpleadosViewController implements Initializable {
     private TextField txtSApellido;
     @FXML
     private DatePicker dtpFechaNacimiento;
-    @FXML
-    private TextField txtPuesto;
     @FXML
     private TextField txtTelefono;
     @FXML
@@ -92,10 +85,13 @@ public class EmpleadosViewController implements Initializable {
     private TableColumn<?, ?> tblPuesto;
     @FXML
     private TableColumn<Empleado, String> tblHorasLaborales;
+    @FXML
+    private ChoiceBox<Puesto> ckPuestos;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarPropiedadesTable();
+        cargarPuestos();
     }
 
     @FXML
@@ -137,7 +133,6 @@ public class EmpleadosViewController implements Initializable {
         txtCorreo.setText("");
         txtNombre.setText("");
         txtPApellido.setText("");
-        txtPuesto.setText("");
         txtSApellido.setText("");
         txtTelefono.setText("");
         txtHorasLaboradas.setText("");
@@ -281,6 +276,11 @@ public class EmpleadosViewController implements Initializable {
             return true;
         }
         return false;
+    }
+
+    private void cargarPuestos() {
+        ObservableList<Puesto> listaLocal = (ObservableList<Puesto>) AppContext.getInstance().get("puestos");
+        ckPuestos.setItems(listaLocal);
     }
 
 }

@@ -51,4 +51,11 @@ public class Puesto {
         this.empleados.add(empleado);
     }
 
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+    
+    
+
 }
