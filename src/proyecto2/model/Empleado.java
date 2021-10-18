@@ -18,7 +18,7 @@ public class Empleado {
     private Puesto puesto;
 
     private String telefono;
-
+    private String estadoPago;
     private String email;
     private Integer horasLaborales;
 
@@ -32,13 +32,17 @@ public class Empleado {
         this.telefono = telefono;
         this.email = email;
         this.horasLaborales = horasLaborales;
+        this.estadoPago = "Pendiente";
     }
 
-   
+    
+    public String getEstadoPago() {
+        return estadoPago;
+    }
 
-
-
-  
+    public void setEstadoPago(String estadoPago) {
+        this.estadoPago = estadoPago;
+    }
 
     public String getCedula() {
         return cedula;

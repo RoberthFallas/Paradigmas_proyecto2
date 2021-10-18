@@ -93,6 +93,7 @@ public class EmpleadosViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         AppContext.getInstance().set("listEmpleados", empleados);
         txtCedula.setTextFormatter(Formato.getInstance().cedulaFormat(12));
         txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(12));
         txtPApellido.setTextFormatter(Formato.getInstance().letrasFormat(12));
@@ -111,7 +112,7 @@ public class EmpleadosViewController implements Initializable {
             if (!btnCancelar.isVisible()) {
                 if (!existeEmpleado(nuevoEmpledo)) {
                     empleados.add(nuevoEmpledo);
-                    AppContext.getInstance().set("listEmpleados", empleados);
+                  
                     tblEmpleados.getItems().addAll(empleados);
                     limpiar();
                 }else{
@@ -212,7 +213,7 @@ public class EmpleadosViewController implements Initializable {
     void eliminarEmpleado(Empleado empleado) {
         empleados.remove(empleado);
         tblEmpleados.getItems().remove(empleado);
-        AppContext.getInstance().set("listEmpleados", empleados);
+
     }
 
     void cargarDatosClienteSeleccionado(Empleado empleado) {
@@ -266,7 +267,7 @@ public class EmpleadosViewController implements Initializable {
         btnCancelar.setVisible(false);
         tblEmpleados.setDisable(false);
         empleados.set(posicionEditar, nuevoEmpleado);
-        AppContext.getInstance().set("listEmpleados", empleados);
+       
 
     }
 

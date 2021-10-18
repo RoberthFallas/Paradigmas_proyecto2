@@ -12,6 +12,7 @@
         <Field name="puesto" type="Puesto" visibility="private"/>
         <Field name="telefono" type="String" visibility="private"/>
         <Field name="email" type="String" visibility="private"/>
+        <Field name="estadoPago" type="String" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods>
@@ -47,6 +48,10 @@
         <Method name="setEmail" returnType="void" visibility="public">
           <Argument type="String" name="em"/>
         </Method>
+        <Method name="setEstadoPago" returnType="void" visibility="public">
+          <Argument type="String" name="estpago"/>
+        </Method>
+        <Method name="getEstadoPago" returnType="String" visibility="public"/>
       </Methods>
     </Class>
     <Class name="Puesto" package="" visibility="public" xPosition="483.0" yPosition="374.0">
@@ -78,7 +83,7 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="empleados" source="Puesto" target="Empleado" type="Composition" sourceCardinality="0..1" targetCardinality="0..1"/>
     <HasRelation name="puestos" source="Planilla" target="Puesto" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="empleados" source="Puesto" target="Empleado" type="Composition" sourceCardinality="0..1" targetCardinality="0..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>

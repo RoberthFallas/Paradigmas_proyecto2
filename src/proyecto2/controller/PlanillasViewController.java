@@ -6,8 +6,26 @@
 package proyecto2.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.util.Callback;
+import proyecto2.model.Empleado;
+import proyecto2.model.Puesto;
+import proyecto2.util.AppContext;
+import proyecto2.util.Mensaje;
 
 /**
  * FXML Controller class
@@ -16,12 +34,114 @@ import javafx.fxml.Initializable;
  */
 public class PlanillasViewController implements Initializable {
 
+    @FXML
+    private Label lblAgregarCargosLaborales;
+    @FXML
+    private TextField txtCargosLaborales;
+    @FXML
+    private Button btnConfirmarPago;
+    @FXML
+    private TableColumn<Empleado, String> tblCedula;
+    @FXML
+    private TableColumn<Empleado, String> tblNombre;
+    @FXML
+    private TableColumn<Empleado, String> tblPrimerApellido;
+    @FXML
+    private TableColumn<Empleado, String> tblSegundoApellido;
+    @FXML
+    private TableColumn<Empleado, String> tblHorasLaboradas;
+    @FXML
+    private TableColumn<Empleado, String> tblPuestos;
+    @FXML
+    private TableColumn<Empleado, String> tblSalarioBruto;
+    @FXML
+    private TableColumn<?, ?> tblCargosLAborales;
+    @FXML
+    private TableColumn<?, ?> tblHorasExtra;
+    @FXML
+    private TableColumn<Empleado, Void> tblAccion;
+
+    ArrayList<Empleado> listaEmpleados = (ArrayList<Empleado>) AppContext.getInstance().get("listEmpleados");
+    @FXML
+    private TableView<Empleado> tbPlanilla;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+        
+        cargarPropiedadesTable();
+    }
+
+    @FXML
+    private void ConfirmarPago(ActionEvent event) {
+        for (Empleado listaEmpleado : listaEmpleados) {
+            System.out.println(listaEmpleado.getCedula());
+        }
+       
+         refrescarTabla();
+
+    }
+
+    private void refrescarTabla() {
+        tbPlanilla.getItems().clear();
+        for (Empleado listaEmpleado : listaEmpleados) {
+            if (listaEmpleado.getEstadoPago() == "Pendiente") {
+                tbPlanilla.getItems().add(listaEmpleado);
+            }
+        }
+    }
+
+    private void cargarPropiedadesTable() {
+        
+        tblCedula.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getCedula()));
+        tblNombre.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getNombre()));
+        tblPrimerApellido.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getpApellido()));
+        tblSegundoApellido.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getsApellido()));
+        tblHorasLaboradas.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getHorasLaborales())));
+        tblPuestos.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getPuesto().getNombre()));
+        tblSalarioBruto.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getHorasLaborales() * x.getValue().getPuesto().getSalario())));
+        agregarBotonPago();
+    }
+    
+    
+    private void agregarBotonPago() {
+        Callback<TableColumn<Empleado, Void>, TableCell<Empleado, Void>> cellFactory = (final TableColumn<Empleado, Void> param) -> {
+            final TableCell<Empleado, Void> cell = new TableCell<Empleado, Void>() {
+
+                private final Button btn = new Button("Pagar");
+
+                {
+                    btn.setOnAction((ActionEvent event) -> {
+                        pagarEmpleado(getTableView().getItems().get(getIndex())); 
+                    });
+                }
+
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(btn);
+                    }
+                }
+            };
+            return cell;
+        };
+
+        tblAccion.setCellFactory(cellFactory);
+    }
+    
+    private void pagarEmpleado(Empleado emp){
+        
+        emp.setEstadoPago("Pagado");
+        emp.setHorasLaborales(0);
+        new Mensaje().show(Alert.AlertType.INFORMATION, "Pago de empleado", "El pago se ha realizado con exito");
+         refrescarTabla();
+    }
+    
     
 }
