@@ -23,6 +23,8 @@ public class Proyecto2 extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("view/Base.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setMinWidth(720d);
+        stage.setMinHeight(400d);
         stage.show();
     }
 
