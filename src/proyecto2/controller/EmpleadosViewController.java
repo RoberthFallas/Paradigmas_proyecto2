@@ -93,7 +93,7 @@ public class EmpleadosViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         AppContext.getInstance().set("listEmpleados", empleados);
+        AppContext.getInstance().set("listEmpleados", empleados);
         txtCedula.setTextFormatter(Formato.getInstance().cedulaFormat(12));
         txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(12));
         txtPApellido.setTextFormatter(Formato.getInstance().letrasFormat(12));
@@ -104,25 +104,26 @@ public class EmpleadosViewController implements Initializable {
         cargarPuestos();
     }
 
+    /*
+Metodo para registrar un empleado nuevo, ademas valida si es una edicion 
+     */
     @FXML
     private void GuardarEmpleado(ActionEvent event) {
         int horasExtras;
         if (formularioCompleto()) {
-            if(Integer.valueOf(txtHorasLaboradas.getText())>48){
-                horasExtras = (Integer.valueOf(txtHorasLaboradas.getText())-48);
-            }
-            else
-            {
+            if (Integer.valueOf(txtHorasLaboradas.getText()) > 48) {
+                horasExtras = (Integer.valueOf(txtHorasLaboradas.getText()) - 48);
+            } else {
                 horasExtras = 0;
             }
-            Empleado nuevoEmpledo = new Empleado(txtCedula.getText(), txtNombre.getText(), txtPApellido.getText(), txtSApellido.getText(), dtpFechaNacimiento.getValue(), ckPuestos.getValue(), txtTelefono.getText(), txtCorreo.getText(), Integer.parseInt(txtHorasLaboradas.getText()),horasExtras);
+            Empleado nuevoEmpledo = new Empleado(txtCedula.getText(), txtNombre.getText(), txtPApellido.getText(), txtSApellido.getText(), dtpFechaNacimiento.getValue(), ckPuestos.getValue(), txtTelefono.getText(), txtCorreo.getText(), Integer.parseInt(txtHorasLaboradas.getText()), horasExtras);
             if (!btnCancelar.isVisible()) {
                 if (!existeEmpleado(nuevoEmpledo)) {
                     empleados.add(nuevoEmpledo);
-                  
+
                     tblEmpleados.getItems().addAll(empleados);
                     limpiar();
-                }else{
+                } else {
                     new Mensaje().show(Alert.AlertType.WARNING, "Atención", "Este empleado ya existe");
                 }
             } else {
@@ -135,7 +136,9 @@ public class EmpleadosViewController implements Initializable {
             new Mensaje().show(Alert.AlertType.WARNING, "Atención", "Algunos campos requeridos están vacíos");
         }
     }
-
+/*
+    carga los datos de la lista a las tablas
+*/
     private void cargarPropiedadesTable() {
         tblEmpleados.setPlaceholder(new Label("Sin Empleados"));
         tbCedula.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getCedula()));
@@ -150,7 +153,7 @@ public class EmpleadosViewController implements Initializable {
         agregarBotonEditar();
         agregarBotonElimiar();
     }
-
+/*Limpia los campos de controllers*/
     private void limpiar() {
         txtCedula.setText("");
         txtCorreo.setText("");
@@ -163,7 +166,7 @@ public class EmpleadosViewController implements Initializable {
         dtpFechaNacimiento.setValue(null);
 
     }
-
+/* Metodo para agregar el boton de eliminar a la tabla de empleados*/
     private void agregarBotonElimiar() {
         Callback<TableColumn<Empleado, Void>, TableCell<Empleado, Void>> cellFactory = (final TableColumn<Empleado, Void> param) -> {
             final TableCell<Empleado, Void> cell = new TableCell<Empleado, Void>() {
@@ -181,6 +184,7 @@ public class EmpleadosViewController implements Initializable {
                     if (empty) {
                         setGraphic(null);
                     } else {
+                        btn.setStyle("-fx-background-color:#8E0505; -fx-text-fill: whitesmoke;");
                         setGraphic(btn);
                     }
                 }
@@ -189,7 +193,7 @@ public class EmpleadosViewController implements Initializable {
         };
         tblEliminar.setCellFactory(cellFactory);
     }
-
+/* Metodo para agregar el boton de editar a la tabla de empleados*/
     private void agregarBotonEditar() {
         Callback<TableColumn<Empleado, Void>, TableCell<Empleado, Void>> cellFactory = (final TableColumn<Empleado, Void> param) -> {
             final TableCell<Empleado, Void> cell = new TableCell<Empleado, Void>() {
@@ -207,6 +211,8 @@ public class EmpleadosViewController implements Initializable {
                     if (empty) {
                         setGraphic(null);
                     } else {
+                        btn.setStyle("-fx-background-color:#388E3C; -fx-text-fill: whitesmoke;");
+
                         setGraphic(btn);
                     }
                 }
@@ -216,13 +222,13 @@ public class EmpleadosViewController implements Initializable {
 
         tblEditar.setCellFactory(cellFactory);
     }
-
+/*Remueve el empleado de la tabla y de la lista*/
     void eliminarEmpleado(Empleado empleado) {
         empleados.remove(empleado);
         tblEmpleados.getItems().remove(empleado);
 
     }
-
+/*Carga los datos de la tabla del cliente seleccionado a a los campos para poder editar*/
     void cargarDatosClienteSeleccionado(Empleado empleado) {
         for (int x = 0; x < empleados.size(); x++) {
             if (empleados.get(x) == empleado) {
@@ -242,7 +248,7 @@ public class EmpleadosViewController implements Initializable {
         btnCancelar.setVisible(true);
         btnBuscar.setVisible(false);
     }
-
+/*Cancela la edicion de datos*/
     @FXML
     private void CancelarEdicion(ActionEvent event) {
         btnBuscar.setVisible(true);
@@ -251,7 +257,7 @@ public class EmpleadosViewController implements Initializable {
 
         limpiar();
     }
-
+/*Metodo para realizar la busqueda de empleados*/
     @FXML
     private void buscarEmpleado(ActionEvent event) {
         String e = txtHorasLaboradas.getText();
@@ -259,8 +265,8 @@ public class EmpleadosViewController implements Initializable {
         String e2 = txtHorasLaboradas.getText();
         tblEmpleados.getItems().clear();
         List<Empleado> emple = new ArrayList();
-        emple = empleados.stream().filter(x ->
-                (x.getCedula().toUpperCase().contains(txtCedula.getText().toUpperCase()))
+        emple = empleados.stream().filter(x
+                -> (x.getCedula().toUpperCase().contains(txtCedula.getText().toUpperCase()))
                 && (x.getNombre().toUpperCase().contains(txtNombre.getText().toUpperCase()))
                 && (x.getpApellido().toUpperCase().contains(txtPApellido.getText().toUpperCase()))
                 && (x.getsApellido().toUpperCase().contains(txtSApellido.getText().toUpperCase()))).collect(Collectors.toList());
@@ -268,16 +274,15 @@ public class EmpleadosViewController implements Initializable {
             tblEmpleados.getItems().add(cnsmr);
         });
     }
-
+/* Metodo para realizar la edicion del empleado */
     private void editarEmpleado(Empleado nuevoEmpleado) {
         btnBuscar.setVisible(true);
         btnCancelar.setVisible(false);
         tblEmpleados.setDisable(false);
         empleados.set(posicionEditar, nuevoEmpleado);
-       
 
     }
-
+/*Valida si existe el empleado que se va a registrar tomando en cuenta la cedula*/
     private boolean existeEmpleado(Empleado nuevoEmpledo) {
         for (Empleado empleado : empleados) {
             if (empleado.getCedula().equals(nuevoEmpledo.getCedula())) {
@@ -286,7 +291,7 @@ public class EmpleadosViewController implements Initializable {
         }
         return false;
     }
-
+/*Valida si todos los campos del formulario estan llenos*/
     private boolean formularioCompleto() {
         if (txtCedula.getText().length() != 0 && txtNombre.getText().length() != 0
                 && txtPApellido.getText().length() != 0
@@ -299,7 +304,7 @@ public class EmpleadosViewController implements Initializable {
         }
         return false;
     }
-
+/*Cargar lista de  todos los puestos existentes*/
     private void cargarPuestos() {
         ObservableList<Puesto> listaLocal = (ObservableList<Puesto>) AppContext.getInstance().get("puestos");
         ckPuestos.setItems(listaLocal);

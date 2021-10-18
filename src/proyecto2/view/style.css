@@ -1,0 +1,83 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15 oct. 2020, 17:05:10
+    Author     : LordLalo
+*/
+
+/*start --------------------------+Paleta general de colores+---------------------------------- start*/
+*{
+    -fx-backGraundColor: linear-gradient(from 25% 25% to 100% 100%, #ffffff, #A5D6A7);
+    -fx-menu-superior-backGraundColor: linear-gradient(from 25% 25% to 30% 100%, #ffffff, #C5E1A5);
+    -fx-advance-color:linear-gradient(#00BCD4  0%,#1565C0 100%);
+    -fx-advance-hover-color: #0D47A1;
+    -fx-dangerousButton-color: linear-gradient(#D84315 0%,#b71c1c 100%);
+    -fx-dangerousButton-hover-color:#701006;
+    -fx-dangerousButton-dissble-color:#BFA29F;
+    -fx-tittle-color: #2E7D32;
+    -fx-tittle-dark-color:#435948;
+    -fx-semitrasparent-glass-color:#75757550;
+    -fx-fly-module-separator-color:#42424270;
+    -fx-fly-graphic-day-visor-color:#004D40;
+}
+/*end ----------------------------*Paleta general de colores*----------------------------------- end*/
+
+#dangerous-button-efect{
+    -fx-background-color: -fx-dangerousButton-color;
+}
+#dangerous-button-efect:hover{
+    -fx-background-color: -fx-dangerousButton-hover-color;
+}
+#dangerous-button-efect:disabled{
+    -fx-background-color: -fx-dangerousButton-dissble-color;
+    -fx-border-style: dotted , dashed  , dashed  , dashed;
+    -fx-border-radius: 3;
+    -fx-border-color:#607D8B;
+    -fx-text-fill:  #403A38;
+}
+
+#advance-button-efect{
+    -fx-background-color: -fx-advance-color;
+}
+#advance-button-efect:hover{
+    -fx-background-color: -fx-advance-hover-color;
+}
+.label{
+    -fx-text-fill: #388E3C;
+}
+
+#dangerous-button-efect{
+    -fx-background-color: -fx-dangerousButton-color;
+}
+#dangerous-button-efect:hover{
+    -fx-background-color: -fx-dangerousButton-hover-color;
+}
+#dangerous-button-efect:disabled{
+    -fx-background-color: -fx-dangerousButton-dissble-color;
+    -fx-border-style: dotted , dashed  , dashed  , dashed;
+    -fx-border-radius: 3;
+    -fx-border-color:#607D8B;
+    -fx-text-fill:  #403A38;
+}
+
+.botonesGenerales{
+    -fx-text-fill: whitesmoke;
+    -fx-background-color:#388E3C;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 15px;
+    -fx-font: bold 10pt "Berlin Sans FB" ;
+     -fx-pref-height: 40px; 
+    -fx-pref-width: 150px; 
+}
+.botonesPeligro{
+    -fx-text-fill: whitesmoke;
+    -fx-background-color:#8E0505;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 15px;
+    -fx-font: bold 10pt "Berlin Sans FB" ;
+     -fx-pref-height: 40px; 
+    -fx-pref-width: 150px; 
+}

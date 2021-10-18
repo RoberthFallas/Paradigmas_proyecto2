@@ -103,6 +103,7 @@ public class PuestosViewController implements Initializable {
                     if (empty) {
                         setGraphic(null);
                     } else {
+                        btn.setStyle("-fx-background-color:#388E3C; -fx-text-fill: whitesmoke;");
                         setGraphic(btn);
                     }
                 }
@@ -137,7 +138,7 @@ public class PuestosViewController implements Initializable {
         Puesto p5 = new Puesto("Psicología", 6000f, "Trabajan con mentes");
 
         listaLocal2.addAll(Arrays.asList(p1, p2, p3, p4, p5));
-
+        tbPuestos.getItems().addAll(listaLocal2);
     }
 
     @FXML
@@ -151,11 +152,13 @@ public class PuestosViewController implements Initializable {
             } else {
                 Puesto nuevo = new Puesto(txtNombre.getText().trim(),
                         Float.valueOf(txtSalario.getText()), txtDescripcion.getText().trim());
-
                 new Mensaje().show(Alert.AlertType.INFORMATION, "Acción completada", "Has registrado un puesto");
                 listaLocal2.add(nuevo);
+             
                 limpiarCampos(null);
             }
+               tbPuestos.getItems().clear();
+                tbPuestos.getItems().addAll(listaLocal2);
         } else {
             new Mensaje().showModal(Alert.AlertType.WARNING, "Atención",
                     this.tbPuestos.getScene().getWindow(), "Parece que hay algunos campos requeridos que continuan vacíos.");
@@ -175,8 +178,8 @@ public class PuestosViewController implements Initializable {
                 && !txtNombre.getText().trim().isEmpty()
                 && !txtSalario.getText().trim().isEmpty();
     }
-    
-    private void bindearCampos(){
+
+    private void bindearCampos() {
         txtDescripcion.setText(enEdicion.getDescripcion());
         txtNombre.setText(enEdicion.getNombre());
         txtSalario.setText(enEdicion.getSalario().toString());

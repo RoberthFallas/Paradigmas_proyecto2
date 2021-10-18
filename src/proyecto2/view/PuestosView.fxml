@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.controller.PuestosViewController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1024.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.controller.PuestosViewController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Registro de puestos" textAlignment="CENTER">
+            <Label text="Registro de puestos" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -50,9 +50,9 @@
                         <Insets left="25.0" />
                      </HBox.margin>
                      <children>
-                        <Button mnemonicParsing="false" onAction="#gaurdarCambios" text="Guardar cambios" />
-                        <Button mnemonicParsing="false" onAction="#Buscar" text="Buscar" />
-                        <Button mnemonicParsing="false" onAction="#limpiarCampos" text="Limiar" />
+                        <Button mnemonicParsing="false" onAction="#gaurdarCambios" styleClass="botonesGenerales" stylesheets="@style.css" text="Guardar cambios" />
+                        <Button mnemonicParsing="false" onAction="#Buscar" styleClass="botonesGenerales" text="Buscar" />
+                        <Button mnemonicParsing="false" onAction="#limpiarCampos" styleClass="botonesPeligro" text="Limiar" />
                      </children>
                   </VBox>
                </children>

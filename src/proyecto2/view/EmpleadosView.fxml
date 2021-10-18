@@ -11,12 +11,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.controller.EmpleadosViewController">
+<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="1071.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.controller.EmpleadosViewController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="1064.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Registro de empleados" textAlignment="CENTER" />
+            <Label text="Registro de empleados" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></Label>
             <HBox alignment="CENTER_LEFT" prefHeight="108.0" prefWidth="1024.0">
                <children>
                   <Label text="Cédula">
@@ -24,7 +28,7 @@
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtCedula" promptText="Digite su cedula ">
+                  <TextField fx:id="txtCedula">
                      <opaqueInsets>
                         <Insets right="10.0" />
                      </opaqueInsets>
@@ -84,29 +88,32 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#buscarEmpleado" text="Buscar" />
-                  <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#GuardarEmpleado" text="Guardar" />
-                  <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#CancelarEdicion" text="Cancelar" visible="false" />
+                  <Button id="botonesPregunta" fx:id="btnBuscar" mnemonicParsing="false" onAction="#buscarEmpleado" prefWidth="135.0" styleClass="botonesGenerales" stylesheets="@style.css" text="Buscar" />
+                  <Button fx:id="btnGuardar" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#GuardarEmpleado" prefWidth="100.0" styleClass="botonesGenerales" text="Guardar" textAlignment="CENTER">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding></Button>
+                  <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#CancelarEdicion" styleClass="botonesPeligro" text="Cancelar" visible="false" />
                </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <HBox prefHeight="383.0" prefWidth="1024.0">
+            <HBox prefHeight="383.0" prefWidth="1051.0">
                <children>
-                  <TableView fx:id="tblEmpleados" prefHeight="320.0" prefWidth="1018.0">
+                  <TableView fx:id="tblEmpleados" prefHeight="383.0" prefWidth="1032.0">
                      <columns>
                         <TableColumn fx:id="tbCedula" prefWidth="75.0" text="Cédula" />
-                        <TableColumn fx:id="tblNombre" prefWidth="97.0" text="Nombre" />
-                        <TableColumn fx:id="tblPapellido" prefWidth="112.0" text="Primer Apellido" />
+                        <TableColumn fx:id="tblNombre" prefWidth="99.0" text="Nombre" />
+                        <TableColumn fx:id="tblPapellido" prefWidth="109.0" text="Primer Apellido" />
                         <TableColumn fx:id="tblSapellido" prefWidth="122.0" text="Segundo Apellido" />
-                        <TableColumn fx:id="tblFechaNacimiento" prefWidth="108.0" text="Fecha Nacimiento" />
-                        <TableColumn fx:id="tblTelefono" prefWidth="75.0" text="Telefono" />
-                        <TableColumn fx:id="tblCorreo" prefWidth="75.0" text="Correo" />
-                        <TableColumn fx:id="tblPuesto" prefWidth="75.0" text="Puesto" />
-                        <TableColumn fx:id="tblHorasLaborales" prefWidth="110.0" text="Horas Laborales" />
-                        <TableColumn fx:id="tblEliminar" prefWidth="88.0" />
-                        <TableColumn fx:id="tblEditar" minWidth="0.0" prefWidth="78.0" />
+                        <TableColumn fx:id="tblFechaNacimiento" prefWidth="119.0" text="Fecha Nacimiento" />
+                        <TableColumn fx:id="tblTelefono" prefWidth="81.0" text="Telefono" />
+                        <TableColumn fx:id="tblCorreo" prefWidth="103.0" text="Correo" />
+                        <TableColumn fx:id="tblPuesto" prefWidth="76.0" text="Puesto" />
+                        <TableColumn fx:id="tblHorasLaborales" prefWidth="102.0" text="Horas Laborales" />
+                        <TableColumn fx:id="tblEditar" minWidth="0.0" prefWidth="64.0" />
+                        <TableColumn fx:id="tblEliminar" prefWidth="142.0" />
                      </columns>
                   </TableView>
                </children>

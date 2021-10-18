@@ -123,6 +123,7 @@ public class PlanillasViewController implements Initializable {
                     if (empty) {
                         setGraphic(null);
                     } else {
+                        btn.setStyle("-fx-background-color:#388E3C; -fx-text-fill: whitesmoke;");
                         setGraphic(btn);
                     }
                 }
