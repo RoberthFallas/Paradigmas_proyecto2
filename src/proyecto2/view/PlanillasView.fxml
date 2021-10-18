@@ -5,14 +5,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.controller.PlanillasViewController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1161.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.controller.PlanillasViewController">
    <children>
-      <VBox layoutY="-2.0" prefHeight="700.0" prefWidth="1026.0">
+      <VBox layoutY="-2.0" prefHeight="700.0" prefWidth="1129.0">
          <children>
             <HBox prefHeight="100.0" prefWidth="990.0">
                <children>
@@ -25,17 +24,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="lblAgregarCargosLaborales" text="Agregar Cargos Laborales">
-                     <HBox.margin>
-                        <Insets left="10.0" top="5.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="txtCargosLaborales" prefHeight="26.0" prefWidth="138.0">
-                     <HBox.margin>
-                        <Insets left="10.0" top="5.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button fx:id="btnConfirmarPago" mnemonicParsing="false" onAction="#ConfirmarPago" text="Confirmar Pago">
+                  <Button fx:id="btnObtenerPlanilla" mnemonicParsing="false" onAction="#ObtenerPlanilla" text="Obtener Planilla">
                      <HBox.margin>
                         <Insets left="10.0" top="5.0" />
                      </HBox.margin>
@@ -44,7 +33,7 @@
             </HBox>
             <HBox prefHeight="507.0" prefWidth="1026.0">
                <children>
-                  <TableView fx:id="tbPlanilla" prefHeight="505.0" prefWidth="1030.0">
+                  <TableView fx:id="tbPlanilla" prefHeight="505.0" prefWidth="1129.0">
                     <columns>
                         <TableColumn fx:id="tblCedula" prefWidth="75.0" text="Cedula" />
                         <TableColumn fx:id="tblNombre" prefWidth="75.0" text="Nombre" />
@@ -55,6 +44,7 @@
                         <TableColumn fx:id="tblSalarioBruto" minWidth="0.0" prefWidth="111.99993896484375" text="Salario Bruto" />
                         <TableColumn fx:id="tblCargosLAborales" prefWidth="115.20001220703125" text="Cargos Laborales" />
                         <TableColumn fx:id="tblHorasExtra" prefWidth="92.79998779296875" text="Horas extra" />
+                        <TableColumn fx:id="tblSalarioNeto" prefWidth="100.00002441406241" text="Salario Neto" />
                         <TableColumn fx:id="tblAccion" prefWidth="130.4000244140625" text="Accion" />
                     </columns>
                   </TableView>

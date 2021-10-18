@@ -106,9 +106,16 @@ public class EmpleadosViewController implements Initializable {
 
     @FXML
     private void GuardarEmpleado(ActionEvent event) {
-
+        int horasExtras;
         if (formularioCompleto()) {
-            Empleado nuevoEmpledo = new Empleado(txtCedula.getText(), txtNombre.getText(), txtPApellido.getText(), txtSApellido.getText(), dtpFechaNacimiento.getValue(), ckPuestos.getValue(), txtTelefono.getText(), txtCorreo.getText(), Integer.parseInt(txtHorasLaboradas.getText()));
+            if(Integer.valueOf(txtHorasLaboradas.getText())>48){
+                horasExtras = (Integer.valueOf(txtHorasLaboradas.getText())-48);
+            }
+            else
+            {
+                horasExtras = 0;
+            }
+            Empleado nuevoEmpledo = new Empleado(txtCedula.getText(), txtNombre.getText(), txtPApellido.getText(), txtSApellido.getText(), dtpFechaNacimiento.getValue(), ckPuestos.getValue(), txtTelefono.getText(), txtCorreo.getText(), Integer.parseInt(txtHorasLaboradas.getText()),horasExtras);
             if (!btnCancelar.isVisible()) {
                 if (!existeEmpleado(nuevoEmpledo)) {
                     empleados.add(nuevoEmpledo);

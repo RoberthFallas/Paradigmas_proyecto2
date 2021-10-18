@@ -34,12 +34,8 @@ import proyecto2.util.Mensaje;
  */
 public class PlanillasViewController implements Initializable {
 
-    @FXML
-    private Label lblAgregarCargosLaborales;
-    @FXML
-    private TextField txtCargosLaborales;
-    @FXML
-    private Button btnConfirmarPago;
+    private Empleado emp = null;
+     
     @FXML
     private TableColumn<Empleado, String> tblCedula;
     @FXML
@@ -55,15 +51,19 @@ public class PlanillasViewController implements Initializable {
     @FXML
     private TableColumn<Empleado, String> tblSalarioBruto;
     @FXML
-    private TableColumn<?, ?> tblCargosLAborales;
+    private TableColumn<Empleado, String> tblCargosLAborales;
     @FXML
-    private TableColumn<?, ?> tblHorasExtra;
+    private TableColumn<Empleado, String> tblHorasExtra;
     @FXML
     private TableColumn<Empleado, Void> tblAccion;
 
     ArrayList<Empleado> listaEmpleados = (ArrayList<Empleado>) AppContext.getInstance().get("listEmpleados");
     @FXML
     private TableView<Empleado> tbPlanilla;
+    @FXML
+    private Button btnObtenerPlanilla;
+    @FXML
+    private TableColumn<Empleado, String> tblSalarioNeto;
 
     /**
      * Initializes the controller class.
@@ -75,15 +75,7 @@ public class PlanillasViewController implements Initializable {
         cargarPropiedadesTable();
     }
 
-    @FXML
-    private void ConfirmarPago(ActionEvent event) {
-        for (Empleado listaEmpleado : listaEmpleados) {
-            System.out.println(listaEmpleado.getCedula());
-        }
-       
-         refrescarTabla();
-
-    }
+   
 
     private void refrescarTabla() {
         tbPlanilla.getItems().clear();
@@ -103,10 +95,16 @@ public class PlanillasViewController implements Initializable {
         tblHorasLaboradas.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getHorasLaborales())));
         tblPuestos.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getPuesto().getNombre()));
         tblSalarioBruto.setCellValueFactory(x -> new SimpleStringProperty(String.valueOf(x.getValue().getHorasLaborales() * x.getValue().getPuesto().getSalario())));
+        tblCargosLAborales.setCellValueFactory(x->new SimpleStringProperty(String.valueOf(x.getValue().getHorasLaborales() * x.getValue().getPuesto().getSalario() * 0.03)));
+        tblHorasExtra.setCellValueFactory(x->new SimpleStringProperty(String.valueOf(x.getValue().getHorasExtra() * x.getValue().getPuesto().getSalario())));
+       tblSalarioNeto.setCellValueFactory(x->new SimpleStringProperty(String.valueOf((x.getValue().getHorasLaborales() * x.getValue().getPuesto().getSalario())+ x.getValue().getHorasExtra() * x.getValue().getPuesto().getSalario() - x.getValue().getHorasLaborales() * x.getValue().getPuesto().getSalario() * 0.03 )));
         agregarBotonPago();
     }
     
-    
+    private void horasExtra(){
+         
+        
+    }
     private void agregarBotonPago() {
         Callback<TableColumn<Empleado, Void>, TableCell<Empleado, Void>> cellFactory = (final TableColumn<Empleado, Void> param) -> {
             final TableCell<Empleado, Void> cell = new TableCell<Empleado, Void>() {
@@ -136,10 +134,18 @@ public class PlanillasViewController implements Initializable {
     }
     
     private void pagarEmpleado(Empleado emp){
-        
+       float pagoHorasExtra = emp.getHorasExtra()*emp.getPuesto().getSalario();
+       float salarioBruto = emp.getHorasLaborales()*emp.getPuesto().getSalario();
+       double cargosLaborales = salarioBruto * 0.03;
+       double salarioNeto = (pagoHorasExtra+ salarioBruto)-cargosLaborales;
         emp.setEstadoPago("Pagado");
         emp.setHorasLaborales(0);
-        new Mensaje().show(Alert.AlertType.INFORMATION, "Pago de empleado", "El pago se ha realizado con exito");
+        new Mensaje().show(Alert.AlertType.INFORMATION, "Pago de empleado", "Se ha cancelado la planilla del empleado "+emp.getNombre()+" "+emp.getpApellido()+" "+emp.getsApellido()+" por un total de: "+salarioNeto);
+         refrescarTabla();
+    }
+
+    @FXML
+    private void ObtenerPlanilla(ActionEvent event) {
          refrescarTabla();
     }
     

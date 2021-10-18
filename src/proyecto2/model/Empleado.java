@@ -8,6 +8,8 @@ public class Empleado {
     private String cedula;
 
     private String nombre;
+    
+    private int horasExtra;
 
     private String pApellido;
 
@@ -22,7 +24,7 @@ public class Empleado {
     private String email;
     private Integer horasLaborales;
 
-    public Empleado(String cedula, String nombre, String pApellido, String sApellido, LocalDate fechaNacimiento, Puesto puesto, String telefono, String email, int horasLaborales) {
+    public Empleado(String cedula, String nombre, String pApellido, String sApellido, LocalDate fechaNacimiento, Puesto puesto, String telefono, String email, int horasLaborales, int horasExtra) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.pApellido = pApellido;
@@ -33,6 +35,15 @@ public class Empleado {
         this.email = email;
         this.horasLaborales = horasLaborales;
         this.estadoPago = "Pendiente";
+        this.horasExtra = horasExtra;
+    }
+
+    public int getHorasExtra() {
+        return horasExtra;
+    }
+
+    public void setHorasExtra(int horasExtra) {
+        this.horasExtra = horasExtra;
     }
 
     
