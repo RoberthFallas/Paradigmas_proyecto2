@@ -136,10 +136,12 @@ Metodo para registrar un empleado nuevo, ademas valida si es una edicion
             new Mensaje().show(Alert.AlertType.WARNING, "Atención", "Algunos campos requeridos están vacíos");
         }
     }
-/*
+
+    /*
     carga los datos de la lista a las tablas
-*/
+     */
     private void cargarPropiedadesTable() {
+        activateResponsiveTable();
         tblEmpleados.setPlaceholder(new Label("Sin Empleados"));
         tbCedula.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getCedula()));
         tblNombre.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getNombre()));
@@ -153,7 +155,23 @@ Metodo para registrar un empleado nuevo, ademas valida si es una edicion
         agregarBotonEditar();
         agregarBotonElimiar();
     }
-/*Limpia los campos de controllers*/
+
+    private void activateResponsiveTable() {
+        tbCedula.prefWidthProperty().bind(tblEmpleados.widthProperty().divide(12));
+        tblCorreo.prefWidthProperty().bind(tblEmpleados.widthProperty().divide(12));
+        tblEditar.prefWidthProperty().bind(tblEmpleados.widthProperty().divide(12));
+        tblEliminar.prefWidthProperty().bind(tblEmpleados.widthProperty().divide(12));
+        tblEmpleados.prefWidthProperty().bind(tblEmpleados.widthProperty().divide(12));
+        tblFechaNacimiento.prefWidthProperty().bind(tblEmpleados.widthProperty().divide(12));
+        tblHorasLaborales.prefWidthProperty().bind(tblEmpleados.widthProperty().divide(12));
+        tblNombre.prefWidthProperty().bind(tblEmpleados.widthProperty().divide(12));
+        tblPapellido.prefWidthProperty().bind(tblEmpleados.widthProperty().divide(12));
+        tblPuesto.prefWidthProperty().bind(tblEmpleados.widthProperty().divide(12));
+        tblSapellido.prefWidthProperty().bind(tblEmpleados.widthProperty().divide(12));
+        tblTelefono.prefWidthProperty().bind(tblEmpleados.widthProperty().divide(12));
+    }
+
+    /*Limpia los campos de controllers*/
     private void limpiar() {
         txtCedula.setText("");
         txtCorreo.setText("");
@@ -166,7 +184,8 @@ Metodo para registrar un empleado nuevo, ademas valida si es una edicion
         dtpFechaNacimiento.setValue(null);
 
     }
-/* Metodo para agregar el boton de eliminar a la tabla de empleados*/
+
+    /* Metodo para agregar el boton de eliminar a la tabla de empleados*/
     private void agregarBotonElimiar() {
         Callback<TableColumn<Empleado, Void>, TableCell<Empleado, Void>> cellFactory = (final TableColumn<Empleado, Void> param) -> {
             final TableCell<Empleado, Void> cell = new TableCell<Empleado, Void>() {
@@ -193,7 +212,8 @@ Metodo para registrar un empleado nuevo, ademas valida si es una edicion
         };
         tblEliminar.setCellFactory(cellFactory);
     }
-/* Metodo para agregar el boton de editar a la tabla de empleados*/
+
+    /* Metodo para agregar el boton de editar a la tabla de empleados*/
     private void agregarBotonEditar() {
         Callback<TableColumn<Empleado, Void>, TableCell<Empleado, Void>> cellFactory = (final TableColumn<Empleado, Void> param) -> {
             final TableCell<Empleado, Void> cell = new TableCell<Empleado, Void>() {
@@ -222,13 +242,15 @@ Metodo para registrar un empleado nuevo, ademas valida si es una edicion
 
         tblEditar.setCellFactory(cellFactory);
     }
-/*Remueve el empleado de la tabla y de la lista*/
+
+    /*Remueve el empleado de la tabla y de la lista*/
     void eliminarEmpleado(Empleado empleado) {
         empleados.remove(empleado);
         tblEmpleados.getItems().remove(empleado);
 
     }
-/*Carga los datos de la tabla del cliente seleccionado a a los campos para poder editar*/
+
+    /*Carga los datos de la tabla del cliente seleccionado a a los campos para poder editar*/
     void cargarDatosClienteSeleccionado(Empleado empleado) {
         for (int x = 0; x < empleados.size(); x++) {
             if (empleados.get(x) == empleado) {
@@ -248,7 +270,8 @@ Metodo para registrar un empleado nuevo, ademas valida si es una edicion
         btnCancelar.setVisible(true);
         btnBuscar.setVisible(false);
     }
-/*Cancela la edicion de datos*/
+
+    /*Cancela la edicion de datos*/
     @FXML
     private void CancelarEdicion(ActionEvent event) {
         btnBuscar.setVisible(true);
@@ -257,7 +280,8 @@ Metodo para registrar un empleado nuevo, ademas valida si es una edicion
 
         limpiar();
     }
-/*Metodo para realizar la busqueda de empleados*/
+
+    /*Metodo para realizar la busqueda de empleados*/
     @FXML
     private void buscarEmpleado(ActionEvent event) {
         String e = txtHorasLaboradas.getText();
@@ -274,7 +298,8 @@ Metodo para registrar un empleado nuevo, ademas valida si es una edicion
             tblEmpleados.getItems().add(cnsmr);
         });
     }
-/* Metodo para realizar la edicion del empleado */
+
+    /* Metodo para realizar la edicion del empleado */
     private void editarEmpleado(Empleado nuevoEmpleado) {
         btnBuscar.setVisible(true);
         btnCancelar.setVisible(false);
@@ -282,7 +307,8 @@ Metodo para registrar un empleado nuevo, ademas valida si es una edicion
         empleados.set(posicionEditar, nuevoEmpleado);
 
     }
-/*Valida si existe el empleado que se va a registrar tomando en cuenta la cedula*/
+
+    /*Valida si existe el empleado que se va a registrar tomando en cuenta la cedula*/
     private boolean existeEmpleado(Empleado nuevoEmpledo) {
         for (Empleado empleado : empleados) {
             if (empleado.getCedula().equals(nuevoEmpledo.getCedula())) {
@@ -291,7 +317,8 @@ Metodo para registrar un empleado nuevo, ademas valida si es una edicion
         }
         return false;
     }
-/*Valida si todos los campos del formulario estan llenos*/
+
+    /*Valida si todos los campos del formulario estan llenos*/
     private boolean formularioCompleto() {
         if (txtCedula.getText().length() != 0 && txtNombre.getText().length() != 0
                 && txtPApellido.getText().length() != 0
@@ -304,7 +331,8 @@ Metodo para registrar un empleado nuevo, ademas valida si es una edicion
         }
         return false;
     }
-/*Cargar lista de  todos los puestos existentes*/
+
+    /*Cargar lista de  todos los puestos existentes*/
     private void cargarPuestos() {
         ObservableList<Puesto> listaLocal = (ObservableList<Puesto>) AppContext.getInstance().get("puestos");
         ckPuestos.setItems(listaLocal);

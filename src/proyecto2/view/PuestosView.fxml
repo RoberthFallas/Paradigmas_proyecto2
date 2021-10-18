@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1024.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.controller.PuestosViewController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="2000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.controller.PuestosViewController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -60,14 +60,14 @@
                   <Insets right="5.0" />
                </opaqueInsets>
             </HBox>
-            <HBox prefHeight="503.0" prefWidth="1024.0">
+            <HBox prefHeight="503.0" prefWidth="1024.0" VBox.vgrow="ALWAYS">
                <children>
                   <TableView fx:id="tbPuestos" prefHeight="371.0" prefWidth="2000.0">
                      <columns>
                         <TableColumn fx:id="clNombre" prefWidth="194.33334350585938" text="Nombre" />
                         <TableColumn fx:id="clSalario" prefWidth="236.66665649414062" text="Salario por hora" />
                         <TableColumn fx:id="clDescripcion" prefWidth="418.6666259765625" text="Descripción" />
-                        <TableColumn fx:id="clacciones" prefWidth="172.0" text="Acciones" />
+                        <TableColumn id="#columnaAcciones" fx:id="clacciones" prefWidth="172.0" text="Acciones" />
                      </columns>
                   </TableView>
                </children>

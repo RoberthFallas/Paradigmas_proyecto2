@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="695.0" prefWidth="1152.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.controller.PlanillasViewController">
+<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="2000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.controller.PlanillasViewController">
    <children>
-      <VBox layoutY="-2.0" prefHeight="700.0" prefWidth="1129.0">
+      <VBox layoutY="-2.0" prefHeight="700.0" prefWidth="1129.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="990.0">
                <children>
@@ -35,9 +35,9 @@
                   </Button>
                </children>
             </HBox>
-            <HBox prefHeight="507.0" prefWidth="1026.0">
+            <HBox prefHeight="507.0" prefWidth="1026.0" VBox.vgrow="ALWAYS">
                <children>
-                  <TableView fx:id="tbPlanilla" prefHeight="505.0" prefWidth="1129.0">
+                  <TableView fx:id="tbPlanilla" prefHeight="505.0" prefWidth="2000.0">
                     <columns>
                         <TableColumn fx:id="tblCedula" prefWidth="75.0" text="Cedula" />
                         <TableColumn fx:id="tblNombre" prefWidth="75.0" text="Nombre" />

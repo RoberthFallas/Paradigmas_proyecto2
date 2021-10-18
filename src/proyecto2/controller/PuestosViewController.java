@@ -73,6 +73,7 @@ public class PuestosViewController implements Initializable {
     }
 
     private void prepararTabla() {
+        activateResponsiveTable();
         tbPuestos.setPlaceholder(new Label("No hay puesto para mostrar"));
         clNombre.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getNombre()));
         clSalario.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getSalario().toString()));
@@ -82,6 +83,13 @@ public class PuestosViewController implements Initializable {
                         ? x.getValue().getDescripcion().length() : 25)));
         agregarBotonEditar();
 
+    }
+    
+        private void activateResponsiveTable() {
+        clDescripcion.prefWidthProperty().bind(tbPuestos.widthProperty().divide(4));
+        clNombre.prefWidthProperty().bind(tbPuestos.widthProperty().divide(4));
+        clSalario.prefWidthProperty().bind(tbPuestos.widthProperty().divide(4));
+        clacciones.prefWidthProperty().bind(tbPuestos.widthProperty().divide(4));
     }
 
     private void agregarBotonEditar() {

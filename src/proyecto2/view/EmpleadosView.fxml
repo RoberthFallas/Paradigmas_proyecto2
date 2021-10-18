@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="1071.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.controller.EmpleadosViewController">
+<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="2000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2.controller.EmpleadosViewController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="1064.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -21,14 +21,14 @@
                <font>
                   <Font name="System Bold" size="17.0" />
                </font></Label>
-            <HBox alignment="CENTER_LEFT" prefHeight="108.0" prefWidth="1024.0">
+            <HBox alignment="CENTER" prefHeight="108.0" prefWidth="1024.0">
                <children>
                   <Label text="Cédula">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtCedula">
+                  <TextField fx:id="txtCedula" HBox.hgrow="ALWAYS">
                      <opaqueInsets>
                         <Insets right="10.0" />
                      </opaqueInsets>
@@ -38,53 +38,62 @@
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtNombre" accessibleRole="IMAGE_VIEW" />
+                  <TextField fx:id="txtNombre" accessibleRole="IMAGE_VIEW" HBox.hgrow="ALWAYS" />
                   <Label text="Primer apellido">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtPApellido" />
+                  <TextField fx:id="txtPApellido" HBox.hgrow="ALWAYS" />
                   <Label text="Segundo Apellido">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtSApellido" />
+                  <TextField fx:id="txtSApellido" HBox.hgrow="ALWAYS" />
                </children>
                <opaqueInsets>
                   <Insets right="5.0" />
                </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="1024.0">
+            <HBox alignment="CENTER" prefHeight="83.0" prefWidth="1024.0">
                <children>
                   <Label text="Fecha Nacimiento">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Label>
-                  <DatePicker fx:id="dtpFechaNacimiento" prefHeight="25.0" prefWidth="104.0" />
+                  <DatePicker fx:id="dtpFechaNacimiento" prefHeight="25.0" prefWidth="104.0" HBox.hgrow="ALWAYS" />
                   <Label text="Puesto">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Label>
-                  <ChoiceBox fx:id="ckPuestos" prefWidth="150.0" />
+                  <ChoiceBox fx:id="ckPuestos" prefWidth="150.0" HBox.hgrow="ALWAYS" />
                   <Label text="Teléfono">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtTelefono" />
+                  <TextField fx:id="txtTelefono" HBox.hgrow="ALWAYS" />
                   <Label text="Correo">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtCorreo" />
-                  <Label text="Horas Laborales" />
-                  <TextField fx:id="txtHorasLaboradas" prefHeight="25.0" prefWidth="49.0" />
+                  <TextField fx:id="txtCorreo" HBox.hgrow="ALWAYS" />
+                  <Label text="Horas Laborales">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin></Label>
+                  <TextField fx:id="txtHorasLaboradas" prefHeight="25.0" prefWidth="49.0" HBox.hgrow="ALWAYS" />
                </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
@@ -99,9 +108,9 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <HBox prefHeight="383.0" prefWidth="1051.0">
+            <HBox alignment="CENTER" prefHeight="383.0" prefWidth="1051.0" VBox.vgrow="ALWAYS">
                <children>
-                  <TableView fx:id="tblEmpleados" prefHeight="383.0" prefWidth="1032.0">
+                  <TableView fx:id="tblEmpleados" prefHeight="347.0" prefWidth="2000.0" HBox.hgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="tbCedula" prefWidth="75.0" text="Cédula" />
                         <TableColumn fx:id="tblNombre" prefWidth="99.0" text="Nombre" />
