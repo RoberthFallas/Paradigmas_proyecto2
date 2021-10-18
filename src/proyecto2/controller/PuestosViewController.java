@@ -84,8 +84,8 @@ public class PuestosViewController implements Initializable {
         agregarBotonEditar();
 
     }
-    
-        private void activateResponsiveTable() {
+
+    private void activateResponsiveTable() {
         clDescripcion.prefWidthProperty().bind(tbPuestos.widthProperty().divide(4));
         clNombre.prefWidthProperty().bind(tbPuestos.widthProperty().divide(4));
         clSalario.prefWidthProperty().bind(tbPuestos.widthProperty().divide(4));
@@ -162,11 +162,11 @@ public class PuestosViewController implements Initializable {
                         Float.valueOf(txtSalario.getText()), txtDescripcion.getText().trim());
                 new Mensaje().show(Alert.AlertType.INFORMATION, "Acción completada", "Has registrado un puesto");
                 listaLocal2.add(nuevo);
-             
+
                 limpiarCampos(null);
             }
-               tbPuestos.getItems().clear();
-                tbPuestos.getItems().addAll(listaLocal2);
+            tbPuestos.getItems().clear();
+            tbPuestos.getItems().addAll(listaLocal2);
         } else {
             new Mensaje().showModal(Alert.AlertType.WARNING, "Atención",
                     this.tbPuestos.getScene().getWindow(), "Parece que hay algunos campos requeridos que continuan vacíos.");

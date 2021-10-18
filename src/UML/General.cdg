@@ -2,7 +2,7 @@
 
 <ClassDiagram name="General">
   <ClassDiagramComponents>
-    <Class name="Empleado" package="" visibility="public" xPosition="25.0" yPosition="509.0">
+    <Class name="Empleado" package="" visibility="public" xPosition="139.0" yPosition="348.0">
       <Fields>
         <Field name="cedula" type="String" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -54,7 +54,7 @@
         <Method name="getEstadoPago" returnType="String" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Puesto" package="" visibility="public" xPosition="483.0" yPosition="374.0">
+    <Class name="Puesto" package="" visibility="public" xPosition="664.0" yPosition="510.0">
       <Fields>
         <Field name="nombre" type="String" visibility="private"/>
         <Field name="salario" type="Float" visibility="private"/>
@@ -71,19 +71,8 @@
         <Method name="setDescripcion" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Planilla" package="" visibility="public" xPosition="538.0" yPosition="160.0">
-      <Fields>
-        <Field name="puestos" type="List&lt;Puesto&gt;" visibility="private"/>
-      </Fields>
-      <Constructors/>
-      <Methods>
-        <Method name="pagarPlanilla" returnType="Float" visibility="public"/>
-        <Method name="getNumEmpleados" returnType="Integer" visibility="public"/>
-      </Methods>
-    </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="puestos" source="Planilla" target="Puesto" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="empleados" source="Puesto" target="Empleado" type="Composition" sourceCardinality="0..1" targetCardinality="0..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
